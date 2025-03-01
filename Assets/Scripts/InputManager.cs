@@ -3,33 +3,35 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance;
-    public float moveVal;
-    InputSystem_Actions inputActions;
+    public static PlayerInput PlayerInput;
 
+    public static Vector2 Movement;
     public static bool JumpWasPressed;
+    public static bool JumpWasReleased;
+    public static bool JumpIsHold;
+    public static bool RunIsHold;
+
+    private InputAction _moveAction;
+    private InputAction _jumpAction;
+    private InputAction _runAction;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        PlayerInput = GetComponent<PlayerInput>();
+
+        _moveAction = PlayerInput.actions["Move"];
+        _jumpAction = PlayerInput.actions["Jump"];
+        _runAction = PlayerInput.actions["Run"];
     }
 
-    void Start()
+    private void Update()
     {
-        inputActions = new InputSystem_Actions();
+        Movement = _moveAction.ReadValue<Vector2>();
 
-        // Movimiento horizontal
-        inputActions.Player.Move.performed += i => moveVal = i.ReadValue<float>();
-        inputActions.Player.Move.canceled += _ => moveVal = 0f; // Detener el movimiento al soltar
+        JumpIsHold = _jumpAction.WasCompletedThisFrame();
+        JumpIsHold = _jumpAction.IsPressed();
+        JumpWasReleased = _jumpAction.WasReleasedThisFrame();
 
-        // Detección de salto
-        inputActions.Player.Jump.started += _ => JumpWasPressed = true;
-        inputActions.Player.Jump.canceled += _ => JumpWasPressed = false;
-
-        inputActions.Enable();
+        RunIsHold = _runAction.IsPressed();
     }
-
-    private void OnEnable() => inputActions?.Enable();
-    private void OnDisable() => inputActions?.Disable();
 }
