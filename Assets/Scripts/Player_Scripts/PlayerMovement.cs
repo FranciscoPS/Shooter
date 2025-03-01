@@ -87,18 +87,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Turn(bool turnRight)
+    private void Turn(bool faceRight)
     {
-        if (turnRight)
-        {
-            _isFacingRight = true;
-            transform.Rotate(0f, 100f, 0f);
-        }
-        else
-        {
-            _isFacingRight = false;
-            transform.Rotate(0f, -100f, 0f);
-        }
+        _isFacingRight = faceRight;
+        transform.rotation = Quaternion.Euler(0, faceRight ? 0 : 180, 0);
     }
 
     #endregion
