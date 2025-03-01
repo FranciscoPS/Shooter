@@ -3,16 +3,17 @@ using UnityEngine;
 public class BalaNormal : MonoBehaviour
 {
     [SerializeField] float speed;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float direction = -1f;
+
+    public void SetDirection(float newDirection)
     {
-        
+        direction = newDirection;
+        transform.localScale = new Vector3(direction, 1, 1);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Translate(Time.deltaTime * speed, 0, 0);
+        transform.Translate(Time.deltaTime * speed * direction, 0, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

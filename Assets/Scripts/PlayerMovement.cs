@@ -11,16 +11,27 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D col;
     private bool isGrounded;
+    private bool facingRight = true;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<CapsuleCollider2D>(); // Guardamos la referencia al collider para evitar llamadas innecesarias
+        col = GetComponent<CapsuleCollider2D>();
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocityX = InputManager.Instance.moveVal * speed;
+        float moveInput = InputManager.Instance.moveVal;
+        rb.linearVelocityX = moveInput * speed;
+
+        if (moveInput > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (moveInput < 0 && facingRight)
+        {
+            Flip();
+        }
 
         if (InputManager.JumpWasPressed && isGrounded)
         {
@@ -41,5 +52,13 @@ public class PlayerMovement : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, raycastDistance, groundLayer);
         isGrounded = hit.collider != null;
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight; 
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }
