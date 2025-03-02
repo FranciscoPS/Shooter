@@ -254,7 +254,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1644319304}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
@@ -350,6 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 816875205}
   - component: {fileID: 816875204}
+  - component: {fileID: 816875206}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -369,7 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177aa0393201389489e65dea96b6a1d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveVal: 0
 --- !u!4 &816875205
 Transform:
   m_ObjectHideFlags: 0
@@ -385,6 +385,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &816875206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816875203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1644319291 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 474787301098531619, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
@@ -412,11 +442,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &1644319304 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4348429448685312702, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
-  m_PrefabInstance: {fileID: 7622221737505857513}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1647800231
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +677,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 474787301098531619, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 728122603859480049, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4235247933584345250, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
       propertyPath: speed
       value: 5
@@ -702,10 +735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4348429448685312702, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 519420032}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 474787301098531619, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
       insertIndex: -1
@@ -718,5 +748,6 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1647800233}
   - {fileID: 4501723394270771693}
+  - {fileID: 519420032}
   - {fileID: 816875205}
   - {fileID: 7622221737505857513}
