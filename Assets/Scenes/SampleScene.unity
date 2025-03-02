@@ -704,6 +704,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 392779431831584175, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
+      propertyPath: bigShotCoolDown
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 392779431831584175, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
+      propertyPath: smallShotCoolDown
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 392779431831584175, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
+      propertyPath: normalShotCoolDown
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 392779431831584175, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
       propertyPath: bulletsPrefab.Array.size
       value: 3
       objectReference: {fileID: 0}

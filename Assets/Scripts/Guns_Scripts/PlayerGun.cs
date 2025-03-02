@@ -9,18 +9,22 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] Animator animator;
 
     float ShootSpdMult; //Para animaciones
-    float ShootCD;
+    [SerializeField] private float normalShotCoolDown;
+    [SerializeField] private float smallShotCoolDown;
+    [SerializeField] private float bigShotCoolDown;
 
-    bool isShooting;
+    private float ShotCoolDown;
 
-    float LastShotTime;
-    List<GameObject> BulletsPool = new List<GameObject>();
-    [SerializeField] List<GameObject> bulletsPrefab = new List<GameObject>();
+    public bool isShooting;
+
+    private float LastShotTime;
+    public List<GameObject> BulletsPool = new List<GameObject>();
+    [SerializeField] public List<GameObject> bulletsPrefab = new List<GameObject>();
 
     private void Start()
     {
         BulletPrefab = bulletsPrefab[0];
-        ShootCD = 0.35f;
+        ShotCoolDown = normalShotCoolDown;
         ShootSpdMult = 2;
     }
 
@@ -33,7 +37,7 @@ public class PlayerGun : MonoBehaviour
 
     private void ShootHandler()
     {
-        if (Input.GetAxis("Fire1") > 0 && Time.time - LastShotTime >= ShootCD)
+        if (Input.GetAxis("Fire1") > 0 && Time.time - LastShotTime >= ShotCoolDown)
         {
             animator.SetBool("isShooting", true);
             animator.SetFloat("PotFirSpd", ShootSpdMult);
@@ -68,20 +72,20 @@ public class PlayerGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))   //Para activar el lanza papas
         {
             BulletPrefab = bulletsPrefab[0];
-            ShootCD = 0.35f;
+            ShotCoolDown = normalShotCoolDown;    // 0.35f
             ShootSpdMult = 2;
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))  //Para activar el lanza Zanahorias
         {
             BulletPrefab = bulletsPrefab[1];
-            ShootCD = 0.2f;
+            ShotCoolDown = smallShotCoolDown;     //0.2f
             ShootSpdMult = 3;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             BulletPrefab = bulletsPrefab[2];
-            ShootCD = 0.6f;
+            ShotCoolDown = bigShotCoolDown;     //0.6f
             ShootSpdMult = 1;
         }
     }
