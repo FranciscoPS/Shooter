@@ -20,7 +20,7 @@ public class PlayerGun : MonoBehaviour
     private void Start()
     {
         BulletPrefab = bulletsPrefab[0];
-        ShootCD = 0.2f;
+        ShootCD = 0.35f;
         ShootSpdMult = 2;
     }
 
@@ -38,16 +38,6 @@ public class PlayerGun : MonoBehaviour
         if (Input.GetAxis("Fire1") > 0 && Time.time - LastShotTime >= ShootCD)
         {
             animator.SetBool("isShooting", true);
-            /* case (wepontaip):
-                case papaxd:
-                breik;
-                
-                case sanaoria:
-                animator.SetFloat("CarFirSpd", ShootSpdMult);
-                GameObject smolbulet = GetBullet();
-                
-
-             */
             animator.SetFloat("PotFirSpd", ShootSpdMult);
             //animator.SetTrigger("shoot");
             GameObject Bullet = GetBullet();
@@ -79,17 +69,21 @@ public class PlayerGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))   //Para activar el lanza papas
         {
             BulletPrefab = bulletsPrefab[0];
-            ShootCD = 0.2f;
+            ShootCD = 0.35f;
             ShootSpdMult = 2;
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))  //Para activar el lanza Zanahorias
         {
             BulletPrefab = bulletsPrefab[1];
+            ShootCD = 0.2f;
+            ShootSpdMult = 3;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             BulletPrefab = bulletsPrefab[2];
+            ShootCD = 0.6f;
+            ShootSpdMult = 1;
         }
     }
 }
