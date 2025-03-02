@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
     {
         Movement = _moveAction.ReadValue<Vector2>();
 
-        JumpIsHold = _jumpAction.WasCompletedThisFrame();
+        JumpWasPressed = _jumpAction.WasPressedThisFrame();
         JumpIsHold = _jumpAction.IsPressed();
         JumpWasReleased = _jumpAction.WasReleasedThisFrame();
 
