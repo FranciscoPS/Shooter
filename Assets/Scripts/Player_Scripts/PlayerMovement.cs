@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
             if(_jumpReleasedDuringBuffer)
             {
-                _isFalling = true;
+                _isFastFalling = true;
                 _fastFallReleaseSpeed = VerticalVelocity;
             }
         }
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Salto en el aire después del coyote time
-        else if (_jumpBufferTimer > 0f && _isFalling && _numberOfJumpsUsed < MoveStats.NumberOfJumpsAllowed - 1)
+        else if (_jumpBufferTimer > 0f && _isFalling && _numberOfJumpsUsed < MoveStats.NumberOfJumpsAllowed)
         {
             InitiateJump(2);
             _isFastFalling = false;
@@ -162,19 +162,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        // APPLY GRAVITY WHILE JUMPING
         if (_isJumping)
         {
+            //CHECK FOR HEAD BUMP
             if (_bumpedHead)
             {
                 _isFastFalling = true;
             }
 
-
+            //GRAVITY ON ASCENDING
             if(VerticalVelocity >= 0f)
             {
+                //APEX CONTROLS
                 _apexPoint = Mathf.InverseLerp(MoveStats.InitialJumpVelocity, 0f, VerticalVelocity);
 
-                if(_apexPoint >= MoveStats.ApexThreshold)
+                if(_apexPoint > MoveStats.ApexThreshold)
                 {
                    if(!_isPastApexThreshold)
                     {
@@ -184,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
 
                     if (_isPastApexThreshold)
                     {
-                        _timePastApexThreshold += Time.deltaTime;
+                        _timePastApexThreshold += Time.fixedDeltaTime;
                         if(_timePastApexThreshold < MoveStats.ApexHangTime)
                         {
                             VerticalVelocity = 0f;
@@ -195,44 +198,47 @@ public class PlayerMovement : MonoBehaviour
                         }
                     }
                 }
-            }
 
-
-            else
-            {
-                VerticalVelocity += MoveStats.Gravity * Time.fixedDeltaTime;
-                if(_isPastApexThreshold)
+                //GRAVITY ON ASCENDING BUT NOT PAST APEX THRESHOLD
+                else
                 {
-                    _isPastApexThreshold = false;
+                    VerticalVelocity += MoveStats.Gravity * Time.fixedDeltaTime;
+                    if (_isPastApexThreshold)
+                    {
+                        _isPastApexThreshold = false;
+                    }
                 }
             }
-        }
 
-        else if (!_isFastFalling) 
-        {
-            VerticalVelocity += MoveStats.Gravity * MoveStats.GravityOnReleaseMultiplier * Time.fixedDeltaTime;
-        }
-
-        else if (VerticalVelocity < 0f)
-        {
-            if (!_isFalling)
+            //GRAVITY ON DESCENDING
+            else if (!_isFastFalling)
             {
-                _isFalling = true;
+                VerticalVelocity += MoveStats.Gravity * MoveStats.GravityOnReleaseMultiplier * Time.fixedDeltaTime;
             }
+
+            else if (VerticalVelocity < 0f)
+            {
+                if (!_isFalling)
+                {
+                    _isFalling = true;
+                }
+            }
+
         }
 
+        // JUMP CUT
         if(_isFastFalling)
         {
-            if (_fastFallTime > MoveStats.TimeForUpwardsCancel)
+            if (_fastFallTime >= MoveStats.TimeForUpwardsCancel)
             {
                 VerticalVelocity += MoveStats.Gravity * MoveStats.GravityOnReleaseMultiplier * Time.fixedDeltaTime;
             }
             else if (_fastFallTime < MoveStats.TimeForUpwardsCancel)
             {
-                VerticalVelocity = Mathf.Lerp(_fastFallReleaseSpeed, 0f, _fastFallTime / MoveStats.TimeForUpwardsCancel);
+                VerticalVelocity = Mathf.Lerp(_fastFallReleaseSpeed, 0f, (_fastFallTime / MoveStats.TimeForUpwardsCancel));
             }
 
-            _fastFallTime += Time.deltaTime;
+            _fastFallTime += Time.fixedDeltaTime;
         }
 
         if (!_isGrounded && !_isJumping)

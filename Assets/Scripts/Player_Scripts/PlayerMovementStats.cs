@@ -23,7 +23,7 @@ public class PlayerMovementStats : ScriptableObject
     [Range(0f, 1f)] public float HeadWidth = 0.75f;
 
     [Header("Jump")]
-    public float JumpeHeight = 6.5f;
+    public float JumpHeight = 6.5f;
     [Range(1f, 1.1f)] public float JumpHeightCompensationFactor = 1.054f;
     public float TimeTillJumpApex =0.35f;
     [Range(0.01f, 5f)] public float GravityOnReleaseMultiplier = 2f;
@@ -72,8 +72,8 @@ public class PlayerMovementStats : ScriptableObject
 
     private void CalculateValues()
     {
-        AdjustedJumpHeight = JumpeHeight * JumpHeightCompensationFactor;
-        Gravity = -(2 * AdjustedJumpHeight) / Mathf.Pow(TimeTillJumpApex, 2);
+        AdjustedJumpHeight = JumpHeight * JumpHeightCompensationFactor;
+        Gravity = -(2 * AdjustedJumpHeight) / Mathf.Pow(TimeTillJumpApex, 2f);
         InitialJumpVelocity = Mathf.Abs(Gravity) * TimeTillJumpApex;
     }
 }
