@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BalaNormal : MonoBehaviour
+public class SmallBullet : MonoBehaviour
 {
     [SerializeField] float speed;
     private float direction = 1f;
@@ -20,7 +20,7 @@ public class BalaNormal : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyManager>().ReduceHP();
+            collision.GetComponent<EnemyManager>().ReduceSmallHP();
             gameObject.SetActive(false);
         }
     }
