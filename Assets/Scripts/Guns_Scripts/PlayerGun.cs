@@ -27,10 +27,8 @@ public class PlayerGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         WeaponChange();
         ShootHandler();
-
     }
 
     private void ShootHandler()
@@ -43,6 +41,7 @@ public class PlayerGun : MonoBehaviour
             GameObject Bullet = GetBullet();
 
             Bullet.transform.position = Muzzle.position;
+            Bullet.transform.rotation = Muzzle.rotation;
             Bullet.SetActive(true);
             LastShotTime = Time.time;
         }
@@ -54,13 +53,13 @@ public class PlayerGun : MonoBehaviour
 
     GameObject GetBullet()
     {
-        foreach (GameObject Bullet in BulletsPool)
+        /*foreach (GameObject Bullet in BulletsPool)
         {
             if (!Bullet.activeSelf) return Bullet;
-        }
+        }*/
         GameObject NewBullet = Instantiate(BulletPrefab);
         NewBullet.SetActive(false);
-        BulletsPool.Add(NewBullet);
+        /*BulletsPool.Add(NewBullet);*/
         return NewBullet;
     }
 
