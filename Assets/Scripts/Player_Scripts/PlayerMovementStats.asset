@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb85ec377aeab643ae3f5329cd9f496, type: 3}
   m_Name: PlayerMovementStats
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 12.5
+  MaxWalkSpeed: 8
   GroundAcceleration: 5
   GroundDecelaration: 20
   AirAcceleration: 5

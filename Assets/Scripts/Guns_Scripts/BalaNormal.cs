@@ -3,7 +3,8 @@ using UnityEngine;
 public class BalaNormal : MonoBehaviour
 {
     [SerializeField] float speed;
-    private float direction = -1f;
+    [SerializeField] private float damage;
+    private float direction = 1f;
 
     public void SetDirection(float newDirection)
     {
@@ -13,14 +14,15 @@ public class BalaNormal : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Time.deltaTime * speed * direction, 0, 0);
+        transform.Translate(Time.deltaTime * speed, 0, 0);
+        //Bullet.transform.position = Muzzle.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyManager>().Kill();
+            collision.GetComponent<EnemyManager>().ReduceHP(damage);
             gameObject.SetActive(false);
         }
     }
