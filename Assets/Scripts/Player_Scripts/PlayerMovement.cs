@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGrounded;
     private bool _bumpedHead;
 
+    // Jump Variables
+    public float VerticalVelocity { get; private set; }
+
     private void Awake()
     {
         _isFacingRight = true;
