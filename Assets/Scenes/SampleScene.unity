@@ -710,6 +710,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4235247933584345250, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
+      propertyPath: MoveStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b39fe25f9ee4c64c8d39db5efae1146, type: 2}
+    - target: {fileID: 4235247933584345250, guid: 5afbac5f7a31aa6449835287871fd617, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
