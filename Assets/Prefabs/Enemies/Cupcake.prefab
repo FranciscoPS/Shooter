@@ -177,4 +177,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 4
   moveSpd: 5
-  dmg: 5
+  damageToPlayer: 3

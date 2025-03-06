@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: moveSpd
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -7616014902170044283, guid: 454ed4e21b715bf40b6c602d8d9061e4, type: 3}
+      propertyPath: damageToPlayer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1836855109328757293, guid: 454ed4e21b715bf40b6c602d8d9061e4, type: 3}
       propertyPath: m_Size.y
       value: 1.0752096
