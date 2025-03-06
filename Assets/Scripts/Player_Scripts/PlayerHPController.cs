@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerHPController : MonoBehaviour
 {
     public static PlayerHPController Instance;
-
+    [SerializeField] Animator animator;
     [SerializeField] UIManager uIManager;
     [SerializeField] int MaxHP;
     int currentHP;
@@ -26,6 +26,8 @@ public class PlayerHPController : MonoBehaviour
 
     public void ReducePlayerHP(int dmg)
     {
+        animator.SetTrigger("gotHit");
+
         currentHP = currentHP - dmg;
         if (currentHP > 0)
         {
