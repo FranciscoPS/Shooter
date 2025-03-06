@@ -17,17 +17,17 @@ MonoBehaviour:
   GroundDecelaration: 20
   AirAcceleration: 5
   AirDeceleration: 5
-  MaxRunSpeed: 20
+  MaxRunSpeed: 18
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
   GroundDetectionRayLength: 0.02
   HeaderDetectionRayLength: 0.02
   HeadWidth: 0.75
-  JumpHeight: 6.5
-  JumpHeightCompensationFactor: 1.054
-  TimeTillJumpApex: 0.35
-  GravityOnReleaseMultiplier: 2
+  JumpHeight: 4
+  JumpHeightCompensationFactor: 1.05
+  TimeTillJumpApex: 0.4
+  GravityOnReleaseMultiplier: 1.5
   MaxFallSpeed: 26
   NumberOfJumpsAllowed: 2
   TimeForUpwardsCancel: 0.027
