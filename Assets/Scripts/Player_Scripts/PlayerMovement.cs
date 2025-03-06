@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Collider2D _bodyCollider;
 
     private Rigidbody2D _rb;
+    [SerializeField] Animator animator;
 
     // Movement Variables
     private Vector2 _moveVelocity;
@@ -282,6 +283,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveInput != Vector2.zero)
         {
+            animator.SetBool("isRunning", true);
             TurnCheck(moveInput);
 
             Vector2 targetVelocity = Vector2.zero;
@@ -294,6 +296,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 targetVelocity = new Vector2(moveInput.x, 0f) * MoveStats.MaxWalkSpeed;
+                
             }
 
             _moveVelocity = Vector2.Lerp(_moveVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
@@ -302,6 +305,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (moveInput == Vector2.zero)
         {
+            animator.SetBool("isRunning", false);
             _moveVelocity = Vector2.Lerp(_moveVelocity, Vector2.zero, deceleration * Time.fixedDeltaTime);
             _rb.velocity = new Vector2(_moveVelocity.x, _rb.velocity.y);
         }
