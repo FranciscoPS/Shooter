@@ -24,5 +24,9 @@ public class BalaNormal : MonoBehaviour
             collision.GetComponent<EnemyManager>().ReduceHP(damage);
             gameObject.SetActive(false);
         }
+        if (collision.CompareTag("Limit"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

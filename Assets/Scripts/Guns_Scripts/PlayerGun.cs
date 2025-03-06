@@ -10,7 +10,7 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] Animator animator;
 
     [Header("General Gun Stats")]
-    [SerializeField] public List<GameObject> bulletsPrefab = new List<GameObject>();
+    [SerializeField] public List<GameObject> bulletsPrefabs = new List<GameObject>();
     GameObject BulletPrefab;
     private float ShotCoolDown;
     private float ShootSpdMult;
@@ -20,24 +20,25 @@ public class PlayerGun : MonoBehaviour
     [Header("Normal Gun")]
     [SerializeField] private float normalShotCoolDown;
     [SerializeField] private float normalShootSpdMult = 2;
+    public List<GameObject> normalBullets = new List<GameObject>();
 
     [Header("Fast Gun")]
     [SerializeField] private float smallShotCoolDown;
     [SerializeField] private float smallShootSpdMult = 3;
+    public List<GameObject> fastBullets = new List<GameObject>();
 
     [Header("Big Gun")]
     [SerializeField] private float bigShotCoolDown;
     [SerializeField] private float bigShootSpdMult = 1;
-
+    public List<GameObject> bigBullets = new List<GameObject>();
 
     private void Start()
     {
-        BulletPrefab = bulletsPrefab[0];
+        BulletPrefab = bulletsPrefabs[0];
         ShotCoolDown = normalShotCoolDown;
         ShootSpdMult = normalShootSpdMult;
     }
 
-    // Update is called once per frame
     void Update()
     {
         WeaponChange();
@@ -50,11 +51,25 @@ public class PlayerGun : MonoBehaviour
         {
             animator.SetBool("isShooting", true);
             animator.SetFloat("PotFirSpd", ShootSpdMult);
-            GameObject Bullet = GetBullet();
 
-            Bullet.transform.position = Muzzle.position;
-            Bullet.transform.rotation = Muzzle.rotation;
-            Bullet.SetActive(true);
+            GameObject currentBullet = null;
+
+            switch (ShootSpdMult)
+            {
+                case 2:
+                    currentBullet = GetBullet(BulletTypes.Potato);
+                    break;
+                case 3:
+                    currentBullet = GetBullet(BulletTypes.Carrot);
+                    break;
+                case 1:
+                    currentBullet = GetBullet(BulletTypes.Watermelon);
+                    break;
+            }
+
+            currentBullet.transform.position = Muzzle.position;
+            currentBullet.transform.rotation = Muzzle.rotation;
+            currentBullet.SetActive(true);
             LastShotTime = Time.time;
         }
         else
@@ -63,38 +78,77 @@ public class PlayerGun : MonoBehaviour
         }
     }
 
-    GameObject GetBullet()
+    GameObject GetBullet(BulletTypes bulletType)
     {
-        /*foreach (GameObject Bullet in BulletsPool)
+        GameObject newBullet = null;
+
+        switch (bulletType)
         {
-            if (!Bullet.activeSelf) return Bullet;
-        }*/
-        GameObject NewBullet = Instantiate(BulletPrefab);
-        NewBullet.SetActive(false);
-        /*BulletsPool.Add(NewBullet);*/
-        return NewBullet;
+            case BulletTypes.Potato:
+
+                foreach (GameObject bullet in normalBullets)
+                {
+                    if (!bullet.activeSelf) return bullet;
+                }
+                newBullet = Instantiate(BulletPrefab);
+                normalBullets.Add(newBullet);
+
+                break;
+
+            case BulletTypes.Carrot:
+
+                foreach (GameObject bullet in fastBullets)
+                {
+                    if (!bullet.activeSelf) return bullet;
+                }
+                newBullet = Instantiate(BulletPrefab);
+                fastBullets.Add(newBullet);
+
+                break;
+
+            case BulletTypes.Watermelon:
+
+                foreach (GameObject bullet in bigBullets)
+                {
+                    if (!bullet.activeSelf) return bullet;
+                }
+                newBullet = Instantiate(BulletPrefab);
+                bigBullets.Add(newBullet);
+
+                break;
+        }
+
+        newBullet.SetActive(false);
+        return newBullet;
     }
 
     private void WeaponChange()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))   //Para activar el lanza papas
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            BulletPrefab = bulletsPrefab[0];
-            ShotCoolDown = normalShotCoolDown;    // 0.35f
+            BulletPrefab = bulletsPrefabs[0];
+            ShotCoolDown = normalShotCoolDown;
             ShootSpdMult = normalShootSpdMult;
 
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))  //Para activar el lanza Zanahorias
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            BulletPrefab = bulletsPrefab[1];
-            ShotCoolDown = smallShotCoolDown;     //0.2f
+            BulletPrefab = bulletsPrefabs[1];
+            ShotCoolDown = smallShotCoolDown;
             ShootSpdMult = smallShootSpdMult;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            BulletPrefab = bulletsPrefab[2];
-            ShotCoolDown = bigShotCoolDown;     //0.6f
+            BulletPrefab = bulletsPrefabs[2];
+            ShotCoolDown = bigShotCoolDown;
             ShootSpdMult = bigShootSpdMult;
         }
     }
+}
+
+public enum BulletTypes
+{
+    Potato,
+    Carrot,
+    Watermelon
 }
