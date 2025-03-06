@@ -4,7 +4,6 @@ public class PlayerHPController : MonoBehaviour
 {
     public static PlayerHPController Instance;
     [SerializeField] Animator animator;
-    [SerializeField] UIManager uIManager;
     [SerializeField] int MaxHP;
     int currentHP;
 
@@ -19,9 +18,8 @@ public class PlayerHPController : MonoBehaviour
 
     private void Start()
     {
-
         currentHP = MaxHP;
-        uIManager.UpdateHPText(currentHP);
+        UIManager.Instance.UpdateHPText(currentHP);
     }
 
     public void ReducePlayerHP(int dmg)
@@ -31,7 +29,7 @@ public class PlayerHPController : MonoBehaviour
         currentHP = currentHP - dmg;
         if (currentHP > 0)
         {
-            uIManager.UpdateHPText(currentHP);
+            UIManager.Instance.UpdateHPText(currentHP);
         }
         else
         {
@@ -42,7 +40,7 @@ public class PlayerHPController : MonoBehaviour
     public void KillPlayer()
     {
         gameObject.SetActive(false);
-        uIManager.EnableGameOver(true);
+        UIManager.Instance.EnableGameOver(true);
         InputManager.PlayerInput.gameObject.SetActive(false);
         EnemySpawner.Instance.DeactivateSpawner();
     }

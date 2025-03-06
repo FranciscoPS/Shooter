@@ -44,7 +44,6 @@ public class UIManager : MonoBehaviour
 
     public void EnableGameOver(bool enabled)
     {
-        UpdateHPText(0);
         GameOverScreen.SetActive(enabled);
     }
 }

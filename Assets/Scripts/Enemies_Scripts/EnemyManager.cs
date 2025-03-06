@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (currentHP > 0)
         {
+            ScoreManager.instance.addScore(20);
             currentHP = currentHP - damage;
         }
         else
