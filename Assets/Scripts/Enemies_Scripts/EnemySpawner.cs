@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance;
+
     public GameObject[] enemyPrefabs; 
     public Transform[] spawnPoints;    
     public float spawnInterval = 5f;  
 
     private float nextSpawnTime;
+
+    private void Awake()
+    {
+        if (Instance == null) { Instance = this; }
+        else Destroy(this);
+    }
 
     private void Start()
     {
@@ -34,5 +42,11 @@ public class EnemySpawner : MonoBehaviour
 
        
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+    }
+
+
+    public void DeactivateSpawner()
+    {
+        gameObject.SetActive(false);
     }
 }

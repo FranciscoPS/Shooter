@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 728122603859480049}
   - component: {fileID: 4235247933584345250}
   - component: {fileID: 392779431831584175}
+  - component: {fileID: -7001660181224486472}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -147,9 +148,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Muzzle: {fileID: 4614268473031863383}
-  BulletPrefab: {fileID: 1172262195640204191, guid: 135a86381bb2bc4489acc782988ae70e, type: 3}
-  ShootCD: 0.2
   animator: {fileID: 0}
+  normalShotCoolDown: 0
+  smallShotCoolDown: 0
+  bigShotCoolDown: 0
+  isShooting: 0
+  BulletsPool: []
+  bulletsPrefab: []
+--- !u!114 &-7001660181224486472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474787301098531619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe0b78af5939514ea7bf06c8c893844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &489839727498222982
 GameObject:
   m_ObjectHideFlags: 0

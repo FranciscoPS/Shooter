@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private float maxHP;
     [SerializeField] private float moveSpd;
-    [SerializeField] private float dmg;
+    [SerializeField] public int damageToPlayer;
 
     float currentHP;
 
@@ -23,11 +23,11 @@ public class EnemyManager : MonoBehaviour
         Move();
     }
 
-    public void ReduceHP(float dmg)
+    public void ReduceHP(float damage)
     {
         if (currentHP > 0)
         {
-            currentHP = currentHP - dmg;
+            currentHP = currentHP - damage;
         }
         else
         {
@@ -43,5 +43,14 @@ public class EnemyManager : MonoBehaviour
     private void Move()
     {
         rb.linearVelocity = new Vector2(-1 * moveSpd, 0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHPController.Instance.ReducePlayerHP(damageToPlayer);
+            gameObject.SetActive(false) ;
+        }
     }
 }

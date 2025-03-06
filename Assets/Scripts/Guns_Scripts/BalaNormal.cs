@@ -15,7 +15,6 @@ public class BalaNormal : MonoBehaviour
     void Update()
     {
         transform.Translate(Time.deltaTime * speed, 0, 0);
-        //Bullet.transform.position = Muzzle.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: moveSpd
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -7616014902170044283, guid: 454ed4e21b715bf40b6c602d8d9061e4, type: 3}
+      propertyPath: damageToPlayer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 730276888232262179, guid: 454ed4e21b715bf40b6c602d8d9061e4, type: 3}
       propertyPath: m_GravityScale
       value: 1
