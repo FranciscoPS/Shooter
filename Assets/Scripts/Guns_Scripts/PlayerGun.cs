@@ -4,28 +4,37 @@ using UnityEngine;
 
 public class PlayerGun : MonoBehaviour
 {
+    [Header("Managers")]
+
     [SerializeField] Transform Muzzle;
-    GameObject BulletPrefab;
     [SerializeField] Animator animator;
 
-    float ShootSpdMult; //Para animaciones
-    [SerializeField] private float normalShotCoolDown;
-    [SerializeField] private float smallShotCoolDown;
-    [SerializeField] private float bigShotCoolDown;
-
-    private float ShotCoolDown;
-
-    public bool isShooting;
-
-    private float LastShotTime;
-    public List<GameObject> BulletsPool = new List<GameObject>();
+    [Header("General Gun Stats")]
     [SerializeField] public List<GameObject> bulletsPrefab = new List<GameObject>();
+    GameObject BulletPrefab;
+    private float ShotCoolDown;
+    private float ShootSpdMult;
+    public bool isShooting;
+    private float LastShotTime;
+
+    [Header("Normal Gun")]
+    [SerializeField] private float normalShotCoolDown;
+    [SerializeField] private float normalShootSpdMult = 2;
+
+    [Header("Fast Gun")]
+    [SerializeField] private float smallShotCoolDown;
+    [SerializeField] private float smallShootSpdMult = 3;
+
+    [Header("Big Gun")]
+    [SerializeField] private float bigShotCoolDown;
+    [SerializeField] private float bigShootSpdMult = 1;
+
 
     private void Start()
     {
         BulletPrefab = bulletsPrefab[0];
         ShotCoolDown = normalShotCoolDown;
-        ShootSpdMult = 2;
+        ShootSpdMult = normalShootSpdMult;
     }
 
     // Update is called once per frame
@@ -41,7 +50,6 @@ public class PlayerGun : MonoBehaviour
         {
             animator.SetBool("isShooting", true);
             animator.SetFloat("PotFirSpd", ShootSpdMult);
-            //animator.SetTrigger("shoot");
             GameObject Bullet = GetBullet();
 
             Bullet.transform.position = Muzzle.position;
@@ -73,20 +81,20 @@ public class PlayerGun : MonoBehaviour
         {
             BulletPrefab = bulletsPrefab[0];
             ShotCoolDown = normalShotCoolDown;    // 0.35f
-            ShootSpdMult = 2;
+            ShootSpdMult = normalShootSpdMult;
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))  //Para activar el lanza Zanahorias
         {
             BulletPrefab = bulletsPrefab[1];
             ShotCoolDown = smallShotCoolDown;     //0.2f
-            ShootSpdMult = 3;
+            ShootSpdMult = smallShootSpdMult;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             BulletPrefab = bulletsPrefab[2];
             ShotCoolDown = bigShotCoolDown;     //0.6f
-            ShootSpdMult = 1;
+            ShootSpdMult = bigShootSpdMult;
         }
     }
 }
