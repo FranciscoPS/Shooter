@@ -33,6 +33,7 @@ public class PlayerHPController : MonoBehaviour
     public void ReducePlayerHP(int dmg)
     {
         animator.SetTrigger("gotHit");
+        CineMachineMovementCamera.Instance.ShakeCamera(3f, 4f, .5f);
 
         currentHP = currentHP - dmg;
         if (currentHP > 0)
