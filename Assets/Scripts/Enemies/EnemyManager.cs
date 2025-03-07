@@ -54,10 +54,14 @@ public class EnemyManager : MonoBehaviour
             PlayerHPController.Instance.ReducePlayerHP(damageToPlayer);
             gameObject.SetActive(false) ;
         }
-        else if (collision.gameObject.CompareTag("Wall")) 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
         {
             direction *= -1;
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y); // Invierte el sprite
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y);
         }
     }
 }
