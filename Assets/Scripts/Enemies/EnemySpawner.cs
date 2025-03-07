@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         nextSpawnTime = Time.time + spawnInterval;
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -44,6 +45,10 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
+    public void ActivateSpawner()
+    {
+        gameObject.SetActive(true);
+    }
 
     public void DeactivateSpawner()
     {

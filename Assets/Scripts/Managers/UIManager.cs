@@ -6,6 +6,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject GameOverScreen;
+    [SerializeField] GameObject VictoryScreen;
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI HiScoreText;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         EnableGameOver(false);
+        EnableVictory(false);
     }
 
     public void UpdateScoreText(int score)
@@ -45,5 +47,10 @@ public class UIManager : MonoBehaviour
     public void EnableGameOver(bool enabled)
     {
         GameOverScreen.SetActive(enabled);
+    }
+
+    public void EnableVictory(bool enabled)
+    {
+        VictoryScreen.SetActive(enabled);
     }
 }

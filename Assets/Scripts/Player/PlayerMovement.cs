@@ -71,8 +71,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("TriggerForSpawner"))
+        {
+            EnemySpawner.Instance.ActivateSpawner();
+        }
+
+        if (collision.gameObject.CompareTag("TriggerDeactivateSpawner"))
+        {
+            EnemySpawner.Instance.DeactivateSpawner();
+        }
+
+        if (collision.gameObject.CompareTag("WinCondition"))
+        {
+            UIManager.Instance.EnableVictory(true);
+        }
+    }
+
     #region Jump
-    
+
     private void JumpChecks()
     {
         // Cuando presionamos el boton de salto
