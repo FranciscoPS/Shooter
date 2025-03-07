@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: damageToPlayer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 730276888232262179, guid: 454ed4e21b715bf40b6c602d8d9061e4, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1836855109328757293, guid: 454ed4e21b715bf40b6c602d8d9061e4, type: 3}
       propertyPath: m_Size.x
       value: 21.115175
