@@ -22,6 +22,14 @@ public class PlayerHPController : MonoBehaviour
         UIManager.Instance.UpdateHPText(currentHP);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Limit"))
+        {
+            KillPlayer();
+        }
+    }
+
     public void ReducePlayerHP(int dmg)
     {
         animator.SetTrigger("gotHit");
